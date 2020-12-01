@@ -1,5 +1,6 @@
 const passport = require('passport');
 const keys = require('../config/keys');
+const { IP, PORT } = require('../utils/ip');
 const TwitchStrategy = require('passport-twitch-new').Strategy;
 
 passport.serializeUser((user, done) => {
@@ -16,11 +17,13 @@ passport.use(
     {
       clientID: keys.twitchClientId,
       clientSecret: keys.twitchClientSecret,
-      callbackURL: 'http://172.30.1.47:8000/auth/twitch/callback',
+      callbackURL: `http://${IP}:${PORT}/auth/twitch/callback`,
       scope: 'user:read:email channel:read:stream_key chat:read chat:edit',
     },
-    async (accessToken, refreshToken, profile, done) => {
-      done(null, { ...profile, accessToken, refreshToken });
+    async (accessToken, refreshToken, params, profile, done) => {
+      const expiresIn = params.expires_in;
+      console.log(profile);
+      done(null, { ...profile, accessToken, refreshToken, expiresIn });
     }
   )
 );
