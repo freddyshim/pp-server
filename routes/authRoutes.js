@@ -9,10 +9,8 @@ module.exports = (app) => {
     (req, res) => {
       if (req.user) {
         const redirectUrl =
-          `com.anookday.rpistream://oauth2callback` +
-          `?accessToken=${req.user.accessToken}` +
-          `&refreshToken=${req.user.refreshToken}` +
-          `&expiresIn=${req.user.expiresIn}`;
+          `com.anookday.rpistream://oauth2callback?` +
+          `id=${req.user.id}&accessToken=${req.user.auth.accessToken}`;
         res.redirect(redirectUrl);
       }
     }
