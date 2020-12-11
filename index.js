@@ -1,9 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
-const { IP, PORT } = require('./utils/ip');
 require('./models/User');
 require('./services/passport');
 
@@ -30,6 +30,4 @@ app.get('/', (req, res) => {
 });
 
 // start server
-app.listen(PORT, () => {
-  console.log(`[server]: Server is running at http://${IP}:${PORT}`);
-});
+app.listen(3000);

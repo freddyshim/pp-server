@@ -12,9 +12,7 @@ module.exports = (app) => {
     }
 
     if (id != null && token != null) {
-      console.log(id, token);
       const user = await User.findOne({ id, 'auth.accessToken': token });
-      console.log(user);
       if (!user) {
         return res.status(404).send();
       }
