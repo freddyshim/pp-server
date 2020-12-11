@@ -1,7 +1,7 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
 const keys = require('../config/keys');
-const { IP, PORT } = require('../utils/ip');
+const { ADDRESS } = require('../utils/ip');
 const TwitchStrategy = require('passport-twitch-new').Strategy;
 
 const User = mongoose.model('users');
@@ -20,7 +20,7 @@ passport.use(
     {
       clientID: keys.twitchClientId,
       clientSecret: keys.twitchClientSecret,
-      callbackURL: `http://${IP}:${PORT}/auth/twitch/callback`,
+      callbackURL: `${ADDRESS}/auth/twitch/callback`,
       scope: 'user:read:email channel:read:stream_key chat:read chat:edit',
     },
     async (accessToken, refreshToken, params, profile, done) => {
