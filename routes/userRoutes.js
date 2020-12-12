@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
-const { usersAreEqual } = require('../utils/user');
 
 const User = mongoose.model('users');
 
@@ -11,8 +10,14 @@ module.exports = (app) => {
 
   app.post('/user', requireLogin, async (req, res) => {
     const localUser = req.body;
-    if (!usersAreEqual(localUser, req.user)) {
-      User.updateOne({ id: localUser.id }, localUser);
+    if (localUser) {
+      try {
+        await User.updateOne({ id: localUser.id }, localUser);
+      } catch (ex) {
+        console.log('error: could not save user');
+      } finally {
+        res.send({});
+      }
     }
   });
 };
