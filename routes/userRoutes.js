@@ -1,22 +1,18 @@
 const mongoose = require('mongoose');
+const requireLogin = require('../middlewares/requireLogin');
+const { usersAreEqual } = require('../utils/user');
 
 const User = mongoose.model('users');
 
 module.exports = (app) => {
-  app.get('/user', async (req, res) => {
-    const id = req.header('User-id');
-    const token = req.header('Authorization');
+  app.get('/user', requireLogin, (req, res) => {
+    res.send(req.user);
+  });
 
-    if (!id || !token) {
-      return res.status(400).send();
-    }
-
-    if (id != null && token != null) {
-      const user = await User.findOne({ id, 'auth.accessToken': token });
-      if (!user) {
-        return res.status(404).send();
-      }
-      return res.send(user);
+  app.post('/user', requireLogin, async (req, res) => {
+    const localUser = req.body;
+    if (!usersAreEqual(localUser, req.user)) {
+      User.updateOne({ id: localUser.id }, localUser);
     }
   });
 };
