@@ -1,23 +1,28 @@
-const mongoose = require('mongoose');
-
-const User = mongoose.model('users');
+import { Request, Response, NextFunction } from 'express';
+import { User } from '../models/User';
 
 /**
  * Middleware for verifying login credentials.
  */
-module.exports = async (req, res, next) => {
+export const requireLogin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   const id = req.header('User-id');
   const token = req.header('Authorization');
 
   // missing credentials
   if (!id || !token) {
-    return res.status(400).send();
+    res.status(400).send('Invalid credentials');
+    return;
   }
 
   // invalid credentials
   const user = await User.findOne({ id, 'auth.accessToken': token });
   if (!user) {
-    return res.status(404).send();
+    res.status(404).send('User not found');
+    return;
   }
 
   // attach user to request
