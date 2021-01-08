@@ -19,12 +19,13 @@ class RootController {
 
   @Post('/user')
   @Use(requireLogin)
-  postUser(req: Request, res: Response): void {
+  async postUser(req: Request, res: Response): Promise<void> {
     const localUser = req.body as UserDocument;
     const databaseUser = req.user as UserDocument;
     if (!areUsersEqual(localUser, databaseUser)) {
-      User.updateOne({ id: localUser.id }, localUser);
+      await User.updateOne({ id: localUser.id }, localUser);
     }
+
     res.send({});
   }
 }

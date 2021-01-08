@@ -19,7 +19,7 @@ export const requireLogin = async (
   }
 
   // invalid credentials
-  const user = await User.findOne({ id, 'auth.accessToken': token });
+  const user = await User.findOne({ id });
   if (!user) {
     res.status(404).send('User not found');
     return;
