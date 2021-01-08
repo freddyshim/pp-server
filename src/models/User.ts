@@ -82,8 +82,8 @@ const AudioConfigSchema = new Schema(
 
 const UserSettingsSchema = new Schema(
   {
-    videoConfig: { type: VideoConfigSchema, required: true },
-    audioConfig: { type: AudioConfigSchema, required: true },
+    videoConfig: { type: VideoConfigSchema, default: () => ({}) },
+    audioConfig: { type: AudioConfigSchema, default: () => ({}) },
     darkMode: { type: String, default: 'no' },
     developerMode: { type: Boolean, default: false },
   },
