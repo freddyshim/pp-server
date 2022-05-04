@@ -7,6 +7,7 @@
     "dev:build": "tsc -w",
     "dev:run": "nodemon build/index.js",
     "dev": "concurrently npm:dev:*",
+    "start:install": "npm ci",
     "start:build": "tsc -w",
     "start:run": "forever -c \"nodemon --exitcrash\" build/index.js",
     "start": "concurrently npm:start:*"
