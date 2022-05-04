@@ -8,7 +8,7 @@
     "dev:run": "nodemon build/index.js",
     "dev": "concurrently npm:dev:*",
     "start:build": "tsc -w",
-    "start:run": "forever -c \"nodemon --exitcrash\" build/index.js",
+    "start:run": "pm2 start build/index.js",
     "start": "npm ci && concurrently npm:start:*"
   },
   "keywords": [],
@@ -28,6 +28,7 @@
     "lodash": "^4.17.20",
     "mongoose": "^5.11.2",
     "passport": "^0.4.1",
+    "pm2": "^5.2.0",
     "reflect-metadata": "^0.1.13",
     "typescript": "^4.6.4"
   },
