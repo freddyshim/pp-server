@@ -7,9 +7,7 @@
     "dev:build": "tsc -w",
     "dev:run": "nodemon build/index.js",
     "dev": "concurrently npm:dev:*",
-    "start:build": "tsc -w",
-    "start:run": "pm2 start build/index.js",
-    "start": "npm ci && concurrently npm:start:*"
+    "start": "npm ci && tsc && pm2 start build/index.js"
   },
   "keywords": [],
   "author": "",
