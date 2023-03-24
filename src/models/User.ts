@@ -1,39 +1,39 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose'
 
 export interface UserDocument extends Document {
-  id: string;
+  id: string
   profile: {
-    login: string;
-    displayName: string;
-    description: string;
-    email: string;
-    profileImage: string;
-  };
+    login: string
+    displayName: string
+    description: string
+    email: string
+    profileImage: string
+  }
   auth: {
-    accessToken: string;
-    refreshToken: string;
-    tokenExpiryDate: number;
-  };
+    accessToken: string
+    refreshToken: string
+    tokenExpiryDate: number
+  }
   settings: {
     videoConfig: {
-      width: number;
-      height: number;
-      fps: number;
-      bitrate: number;
-      hardwareRotation: boolean;
-      iFrameInterval: number;
-      rotation: number;
-    };
+      width: number
+      height: number
+      fps: number
+      bitrate: number
+      hardwareRotation: boolean
+      iFrameInterval: number
+      rotation: number
+    }
     audioConfig: {
-      bitrate: number;
-      sampleRate: number;
-      stereo: boolean;
-      echoCanceler: boolean;
-      noiseSuppressor: boolean;
-    };
-    darkMode: string;
-    developerMode: boolean;
-  };
+      bitrate: number
+      sampleRate: number
+      stereo: boolean
+      echoCanceler: boolean
+      noiseSuppressor: boolean
+    }
+    darkMode: string
+    developerMode: boolean
+  }
 }
 
 const UserProfileSchema = new Schema(
@@ -45,7 +45,7 @@ const UserProfileSchema = new Schema(
     profileImage: String,
   },
   { _id: false }
-);
+)
 
 const UserAuthSchema = new Schema(
   {
@@ -54,7 +54,7 @@ const UserAuthSchema = new Schema(
     tokenExpiryDate: Number,
   },
   { _id: false }
-);
+)
 
 const VideoConfigSchema = new Schema(
   {
@@ -67,18 +67,18 @@ const VideoConfigSchema = new Schema(
     rotation: { type: Number, default: 0 },
   },
   { _id: false }
-);
+)
 
 const AudioConfigSchema = new Schema(
   {
-    bitrate: { type: Number, default: 64 * 1024 },
-    sampleRate: { type: Number, default: 44100 },
+    bitrate: { type: Number, default: 256 * 1024 },
+    sampleRate: { type: Number, default: 32000 },
     stereo: { type: Boolean, default: false },
     echoCanceler: { type: Boolean, default: false },
     noiseSuppressor: { type: Boolean, default: false },
   },
   { _id: false }
-);
+)
 
 const UserSettingsSchema = new Schema(
   {
@@ -88,7 +88,7 @@ const UserSettingsSchema = new Schema(
     developerMode: { type: Boolean, default: false },
   },
   { _id: false }
-);
+)
 
 const UserSchema = new Schema(
   {
@@ -98,6 +98,6 @@ const UserSchema = new Schema(
     settings: { type: UserSettingsSchema, required: true },
   },
   { _id: false }
-);
+)
 
-export const User = mongoose.model<UserDocument>('users', UserSchema);
+export const User = mongoose.model<UserDocument>('users', UserSchema)
