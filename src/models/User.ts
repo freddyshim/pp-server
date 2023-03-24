@@ -71,7 +71,7 @@ const VideoConfigSchema = new Schema(
 
 const AudioConfigSchema = new Schema(
   {
-    bitrate: { type: Number, default: 256 * 1024 },
+    bitrate: { type: Number, default: 128 * 1024 },
     sampleRate: { type: Number, default: 32000 },
     stereo: { type: Boolean, default: false },
     echoCanceler: { type: Boolean, default: false },
